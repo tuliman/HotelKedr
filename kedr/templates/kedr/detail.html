@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+{% endblock %}
+
+
+
+{% block content %}
+<div class="container ">
+
+
+    {% for photo in detail.apartment_obj.all %}
+        <img src="{{ photo.img.url }}" class="img-fluid" style="height: 300px ;height: 300px">
+    {% endfor %}
+
+    <div class="card text-center">
+    <div class="card-header">
+       Количество комнат {{ detail.room_value }}
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">{{detail.name}}</h5>
+        <p class="card-text">{{ detail.description }}</p>
+
+    </div>
+    <div class="card-footer text" style="">
+        <b>Суточная аренда : {{ detail.price }}</b>
+
+    </div>
+    <a href="{% url 'to_book_url' %}" class="btn btn-primary">Забронировать</a>
+</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Home page
+{% endblock %}
+
+{% block content %}
+    <div class="card-group" style="display: flex">
+{% for item in info %}
+<div class="card  " style="width: 18rem;">
+  <img src="{{item.apartment_obj.first.img.url}}" class="card-img-top" style="width: 500px;
+height: 400px" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">{{ item.name }}</h5>
+      <h5 class="card-title"></h5>
+    <p class="card-text">{{ item.description_title|truncatewords:100 }}</p>
+    <a href="{% url 'apartment_detail_url' slug=item.slug %}" class="btn btn-primary">Подробней</a>
+  </div>
+</div>
+{% endfor %}
+</div>
+{% endblock %}
