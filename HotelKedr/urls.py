@@ -19,7 +19,7 @@ from django.conf.urls.static import static, settings
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
-    path('kedr/', include('kedr.urls')),
+    path('', include('kedr.urls')),
     path('admin/', admin.site.urls),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

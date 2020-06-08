@@ -1,22 +1,28 @@
-from django.shortcuts import render, HttpResponse, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import View
-from .forms import *
 
+from .forms import *
 from .models import *
 from .send_menejer import send_manager
 
 
 # Create your views here.
 
-def add_content(request):
+def index(request):
     apartment_info = Apartment.objects.all()
     return render(request, 'kedr/index.html', context={'info': apartment_info})
 
 
 def detail(request, slug):
     apartment_detail = get_object_or_404(Apartment, slug__iexact=slug)
+    images = apartment_detail.photo_set.all()
+    context = {
+        'apartment_detail':apartment_detail,
+        'images':images,
 
-    return render(request, 'kedr/detail.html', context={'detail': apartment_detail})
+    }
+
+    return render(request, 'kedr/detail.html', context)
 
 
 class Booking(View):
@@ -31,20 +37,24 @@ class Booking(View):
             send_manager(bound_form.cleaned_data)
 
             return redirect('apartment_list_url')
-        return render(request, 'kedr/reserve.html', context={'form': bound_form})
+        return render(request, 'kedr/reserve.html', context={'forms': bound_form})
 
 
 class CreateApart(View):
     def get(self, request):
-        form = AddApartment()
-        return render(request, 'kedr/create_apartment.html', context={'form': form})
+        form = ApartmentForm()
+        formset = ApartmentFormSet()
+        context = {'form': form, 'formset': formset}
+        return render(request, 'kedr/create_apartment.html', context)
 
     def post(self, request):
-        bound_form = AddApartment(request.POST)
-        if bound_form.is_valid():
-            new_apart = bound_form.save()
-            return redirect(new_apart)
-        return render(request, 'kedr/create_apartment.html', context={'form': bound_form})
+        form = ApartmentForm(request.POST, request.FILES)
+        if form.is_valid():
+            bb = form.save()
+            formset = ApartmentFormSet(request.POST, request.FILES, instance=bb)
+            if formset.is_valid():
+                formset.save()
+                return redirect(index)
 
 
 def get_numbers(request):

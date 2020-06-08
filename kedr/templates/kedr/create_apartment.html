@@ -1,13 +1,15 @@
 {% extends 'base.html' %}
+{% load bootstrap4 %}
 {% block title %}
+    Добавить квартиру
 {% endblock %}
 
-
 {% block content %}
-{% csrf_token %}
-    {% for field in form %}
-        {{ field }}
-        {{ field.label }}
-    {% endfor %}
-
+    <h2>Добавить Новую квартиру</h2>
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% bootstrap_form form layout='Horizontal' %}
+    {% bootstrap_formset formset layout='Horizontal' %}
+    {% buttons submit='Добавить' %} {% endbuttons %}
+    </form>
 {% endblock %}

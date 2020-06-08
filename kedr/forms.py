@@ -1,9 +1,10 @@
-from django.forms import formset_factory, ModelForm, TextInput, EmailInput, NumberInput, Textarea, modelform_factory
+from django import forms
+from django.forms import inlineformset_factory
 from .models import *
 from django.core.exceptions import ValidationError
 
 
-class ReservationDate(ModelForm):
+class ReservationDate(forms.ModelForm):
     class Meta:
         model = ToBook
         fields = ['name', 'email', 'phone_number', 'description']
@@ -12,25 +13,19 @@ class ReservationDate(ModelForm):
             'phone_number': 'Телефонный номер',
             "description": 'Пожелания по подбору'
         }
+
         widgets = {
-            'name': TextInput(attrs={'class': 'form-control'}),
-            'email': EmailInput(attrs={'class': 'form-control'}),
-            'phone_number': NumberInput(attrs={'class': 'form-control'}),
-            'description': Textarea(attrs={'class': 'form-control'}),
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
+            'email': forms.EmailInput(attrs={'class': 'form-control'}),
+            'phone_number': forms.NumberInput(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'class': 'form-control'}),
         }
 
 
-class AddApartment(ModelForm):
+class ApartmentForm(forms.ModelForm):
     class Meta:
         model = Apartment
-
         fields = '__all__'
 
-        labels = {
-            'name': 'Название квартиры',
-            'slug': 'Уникальный индефикатор',
-            'description_title': 'Краткое описание',
-            'description': 'Полное описание',
-            'price': 'Цена аренды',
-            'room_value': 'Количество комнат'
-        }
+
+ApartmentFormSet = inlineformset_factory(Apartment, Photo, fields='__all__')
