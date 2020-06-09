@@ -17,8 +17,8 @@ def detail(request, slug):
     apartment_detail = get_object_or_404(Apartment, slug__iexact=slug)
     images = apartment_detail.photo_set.all()
     context = {
-        'apartment_detail':apartment_detail,
-        'images':images,
+        'apartment_detail': apartment_detail,
+        'images': images,
 
     }
 
@@ -55,7 +55,11 @@ class CreateApart(View):
             if formset.is_valid():
                 formset.save()
                 return redirect(index)
-
+            else:
+                context = {
+                    'form': form, 'formset': formset
+                }
+                return render(request,'kedr/create_apartment.html',context)
 
 def get_numbers(request):
     room = Apartment.objects.filter(room_value='1')

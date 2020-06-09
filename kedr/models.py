@@ -35,10 +35,10 @@ class Photo(models.Model):
 
 
 class ToBook(models.Model):
-    name = models.CharField(max_length=100)
-    email = models.EmailField(max_length=100)
-    phone_number = models.CharField(max_length=20)
-    description = models.TextField(db_index=True)
+    name = models.CharField(max_length=100, verbose_name='Имя')
+    email = models.EmailField(max_length=100,verbose_name='Емеил')
+    phone_number = models.CharField(max_length=20,verbose_name="Телефонный номер")
+    description = models.TextField(db_index=True,verbose_name='Пожелания по подборуу')
     reservation_date = models.DateTimeField(auto_now_add=True)
 
     def get_absolute_url(self):

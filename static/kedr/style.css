@@ -2,4 +2,7 @@
     height: 700px;
     width: 600px;
 }
-
+.title-img{
+    max-width: 400px;
+    max-height: 400px;
+}
