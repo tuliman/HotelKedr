@@ -38,16 +38,18 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="{% url 'number_of_room'  %}" name="1"  >Однакомнатная квартира</a>
-          <a class="dropdown-item" href="{% url 'two_room_apartment' %}" name="2">Двух Комнатная квартира</a>
-          <a class="dropdown-item" href="{% url 'three_room_apartment' %}" name="3">Трех Комнатная квартира</a>
+          <a class="dropdown-item" href="{% url 'two_room_apartment' %}" name="2">ДвухКомнатная квартира</a>
+          <a class="dropdown-item" href="{% url 'three_room_apartment' %}" name="3">ТрехКомнатная квартира</a>
         </div>
       </li>
           <li class="nav-item ">
           <a href="{% url 'contact_url' %}" class="nav-link"> Контакты </a>
         </li>
+          {% if request.user.is_authenticated   %}
           <li class="nav-item ">
               <a href="{% url 'create_apart_url' %}" class="nav-link"> Добавить Квартиру </a>
           </li>
+          {% endif %}
       </ul>
 
     </div>

@@ -1,8 +1,16 @@
 .img-set {
-    height: 700px;
-    width: 600px;
+    max-height: 600px;
+    width: auto;
 }
 .title-img{
+
     max-width: 400px;
     max-height: 400px;
 }
+.carousel {
+    margin-top: 4px;
+    background-color: powderblue;
+    opacity:95%;
+
+}
+

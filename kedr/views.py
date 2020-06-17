@@ -1,5 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import View
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+
 
 from .forms import *
 from .models import *
@@ -40,7 +43,7 @@ class Booking(View):
         return render(request, 'kedr/reserve.html', context={'forms': bound_form})
 
 
-class CreateApart(View):
+class CreateApart(LoginRequiredMixin,View):
     def get(self, request):
         form = ApartmentForm()
         formset = ApartmentFormSet()
@@ -59,7 +62,32 @@ class CreateApart(View):
                 context = {
                     'form': form, 'formset': formset
                 }
-                return render(request,'kedr/create_apartment.html',context)
+                return render(request, 'kedr/create_apartment.html', context)
+
+
+class UpdateApartment(LoginRequiredMixin,View):
+    def get(self, request, slug):
+        data = get_object_or_404(Apartment, slug=slug)
+        form = ApartmentForm(instance=data)
+        formset = ApartmentFormSet()
+        context = {'form': form, 'formset': formset}
+        return render(request, 'kedr/updete_apartment.html', context)
+
+    def post(self, request,slug):
+        data = get_object_or_404(Apartment,slug=slug)
+        form = ApartmentForm(request.POST, request.FILES,instance=data)
+        if form.is_valid():
+            data = form.save()
+            formset = ApartmentFormSet(request.POST, request.FILES, instance=data)
+            if formset.is_valid():
+                formset.save()
+                return redirect(index)
+            else:
+                context = {
+                    'form': form, 'formset': formset
+                }
+                return render(request, 'kedr/create_apartment.html', context)
+
 
 def get_numbers(request):
     room = Apartment.objects.filter(room_value='1')

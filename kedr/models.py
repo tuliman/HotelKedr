@@ -12,13 +12,13 @@ def gen_slug(s):
 
 
 class Apartment(models.Model):
-    name = models.CharField(max_length=100)
-    slug = models.CharField(max_length=100, unique=True, db_index=True)
-    room_value = models.CharField(max_length=100)
-    description_title = models.TextField(blank=True)
-    price = models.CharField(max_length=50)
-    description = models.TextField(blank=True)
-    images = models.ImageField(upload_to='')
+    name = models.CharField(max_length=100,verbose_name='Название')
+    slug = models.CharField(max_length=100, unique=True, db_index=True,verbose_name='Уникальный индефикатор',help_text='Английскими буквами русские слова')
+    room_value = models.CharField(max_length=100,verbose_name="Количество комнат")
+    description_title = models.TextField(blank=True,verbose_name="Краткое описание")
+    price = models.CharField(max_length=50,verbose_name="Стоимость Аренды")
+    description = models.TextField(blank=True,verbose_name="Полное описание")
+    images = models.ImageField(upload_to='',verbose_name="Изображение")
 
     def save(self, *args, **kwargs):
         if not self.id:

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block title %}
+    Обновление информации
+{% endblock %}
+
+{% block content %}
+    <h2>Изменить обьект</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% bootstrap_form form layout='Horizontal' %}
+        {% bootstrap_formset formset layout='Horizontal' %}
+        {% buttons submit='Изменить' %} {% endbuttons %}
+    </form>
+{% endblock %}

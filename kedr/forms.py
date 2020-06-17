@@ -10,6 +10,7 @@ class ReservationDate(forms.ModelForm):
         fields = ['name', 'email', 'phone_number', 'description']
         labels = {
             'name': 'Имя',
+            'email':'Email',
             'phone_number': 'Телефонный номер',
             "description": 'Пожелания по подбору'
         }
