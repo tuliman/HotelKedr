@@ -5,7 +5,7 @@ from datetime import datetime
 
 
 EMAIL_ADDRESS = 'plaktura@mail.ru'
-EMAIL_PASSWORD = '250768Ak'
+EMAIL_PASSWORD = 'adasdasd'
 
 
 def send_manager(body):
