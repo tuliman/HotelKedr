@@ -4,7 +4,7 @@ from email.mime.text import MIMEText
 from datetime import datetime
 
 
-EMAIL_ADDRESS = 'plaktura@mail.ru'
+EMAIL_ADDRESS = 'teastysmtp@mail.ru'
 EMAIL_PASSWORD = 'adasdasd'
 
 
