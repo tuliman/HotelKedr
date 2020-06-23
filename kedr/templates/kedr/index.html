@@ -5,26 +5,17 @@
 {% endblock %}
 
 {% block content %}
-<div class="container text-center">
+<div class="container" >
 {% for item in info %}
-    <div class="card mb-1 col-sm-8" style="margin-top: 10px">
+    <div class="card mb-1 col-sm-10 fluid text-center " style="margin-top: 10px">
         <img class="card-img-top title-img" src="{{ item.images.url }}" alt="Card image cap">
-        <div class="card-body">
-            <h5 class="card-title">{{ item.name }}</h5>
-            <p class="card-text">{{ item.description }}</p>
-            <p class="card-text"><small class="text-muted">{{ item.price }}</small></p>
+        <div class="card-body ">
+            <h5 class="card-title ">{{ item.name }}</h5>
+            <p class="card-text  ">{{ item.description }}</p>
+            <p class="card-text "><small class="text-muted">{{ item.price }}</small></p>
         </div>
         <a href="{% url 'apartment_detail_url' slug=item.slug %}" class="btn btn-primary" target="_blank">Подробней</a>
     </div>
 {% endfor %}
 </div>
 {% endblock %}
-<div class="card  " style="width: 18rem;">
-    <img src="{{item.images.url}}" class="title-img card-img-top rounded"  alt="...">
-    <div class="card-body">
-        <h5 class="card-title  ">{{ item.name }}</h5>
-        <h5 class="card-title"></h5>
-        <p class="card-text">{{ item.description_title|truncatewords:100 }}</p>
-        <a href="{% url 'apartment_detail_url' slug=item.slug %}" class="btn btn-primary" target="_blank">Подробней</a>
-    </div>
-</div>

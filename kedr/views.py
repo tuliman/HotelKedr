@@ -74,7 +74,7 @@ class UpdateApartment(LoginRequiredMixin,View):
         return render(request, 'kedr/updete_apartment.html', context)
 
     def post(self, request,slug):
-        data = get_object_or_404(Apartment,slug=slug)
+        data = get_object_or_404(Apartment, slug=slug)
         form = ApartmentForm(request.POST, request.FILES,instance=data)
         if form.is_valid():
             data = form.save()
