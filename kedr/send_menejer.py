@@ -2,10 +2,10 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from datetime import datetime
-
+from django.contrib import messages
 
 EMAIL_ADDRESS = 'teastysmtp@mail.ru'
-EMAIL_PASSWORD = 'adasdasd'
+EMAIL_PASSWORD = '250768ak'
 
 
 def send_manager(body):

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Apartment, Photo, ToBook
+from .models import Apartment, Photo, ToBook,ApartmentReview
 
 # Register your models here.
 
@@ -20,3 +20,5 @@ class ApartmentAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Apartment,ApartmentAdmin)
+
+admin.site.register(ApartmentReview)

@@ -1,8 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import View
 from django.contrib.auth.mixins import LoginRequiredMixin
-
-
+from django.contrib import messages
 
 from .forms import *
 from .models import *
@@ -31,6 +30,7 @@ def detail(request, slug):
 class Booking(View):
     def get(self, request):
         form = ReservationDate()
+
         return render(request, 'kedr/reserve.html', context={'form': form})
 
     def post(self, request):
@@ -38,12 +38,12 @@ class Booking(View):
         if bound_form.is_valid():
             new_reservation = bound_form.save()
             send_manager(bound_form.cleaned_data)
-
+            messages.add_message(request, messages.SUCCESS, 'Ваша заявка на бронирование успешно добавлена')
             return redirect('apartment_list_url')
         return render(request, 'kedr/reserve.html', context={'forms': bound_form})
 
 
-class CreateApart(LoginRequiredMixin,View):
+class CreateApart(LoginRequiredMixin, View):
     def get(self, request):
         form = ApartmentForm()
         formset = ApartmentFormSet()
@@ -65,7 +65,7 @@ class CreateApart(LoginRequiredMixin,View):
                 return render(request, 'kedr/create_apartment.html', context)
 
 
-class UpdateApartment(LoginRequiredMixin,View):
+class UpdateApartment(LoginRequiredMixin, View):
     def get(self, request, slug):
         data = get_object_or_404(Apartment, slug=slug)
         form = ApartmentForm(instance=data)
@@ -73,9 +73,9 @@ class UpdateApartment(LoginRequiredMixin,View):
         context = {'form': form, 'formset': formset}
         return render(request, 'kedr/updete_apartment.html', context)
 
-    def post(self, request,slug):
+    def post(self, request, slug):
         data = get_object_or_404(Apartment, slug=slug)
-        form = ApartmentForm(request.POST, request.FILES,instance=data)
+        form = ApartmentForm(request.POST, request.FILES, instance=data)
         if form.is_valid():
             data = form.save()
             formset = ApartmentFormSet(request.POST, request.FILES, instance=data)
@@ -106,3 +106,25 @@ def get_number3(request):
 
 def add_contact(request):
     return render(request, 'kedr/contacts.html')
+
+
+class ApartmentsReview(View):
+    def post(self, request):
+        form = ApartmentReviewForm(request.POST)
+        if form.is_valid():
+            print(form)
+            form.save()
+            return redirect(index)
+        else:
+            review = ApartmentReview.objects.all()
+            context = {'form': form, 'review': review}
+            return render(request, 'kedr/review.html', context)
+
+    def get(self, request):
+        form = ApartmentReviewForm(request.POST)
+        review = ApartmentReview.objects.all()
+        context = {
+            'form': form,
+            'review': review
+        }
+        return render(request, 'kedr/review.html', context)

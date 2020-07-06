@@ -43,3 +43,9 @@ class ToBook(models.Model):
 
     def get_absolute_url(self):
         return reverse('to_book_url')
+
+
+class ApartmentReview(models.Model):
+    name = models.CharField(max_length=100, verbose_name='Имя Фамилия Отчество')
+    review = models.TextField(verbose_name='Отзыв')
+    create_at = models.DateTimeField(auto_now_add=True,verbose_name='Коментарий добавлен')

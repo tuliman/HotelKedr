@@ -30,3 +30,9 @@ class ApartmentForm(forms.ModelForm):
 
 
 ApartmentFormSet = inlineformset_factory(Apartment, Photo, fields='__all__')
+
+
+class ApartmentReviewForm(forms.ModelForm):
+    class Meta:
+        model = ApartmentReview
+        fields = '__all__'

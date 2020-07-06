@@ -1,7 +1,6 @@
 from django.urls import path, include
 from .views import *
 
-
 urlpatterns = [
     path('', index, name='apartment_list_url'),
     path('booking/', Booking.as_view(), name='to_book_url'),
@@ -12,4 +11,5 @@ urlpatterns = [
     path('one-room-apartments/', get_numbers, name='number_of_room'),
     path('two-room-apartments/', get_number2, name='two_room_apartment'),
     path('three-room-apartments/', get_number3, name='three_room_apartment'),
+    path('review/', ApartmentsReview.as_view(), name='apartment_review')
 ]

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block title %}
+    Озывы
+{% endblock %}
+
+{% block content %}
+    <div class="container ">
+    <h1 style="font-family: 'Harlow Solid Italic'"> Можете оставить ваше озыв в форме которая находится ниже : </h1>
+    <h3 style="font-family: 'Harlow Solid Italic'"> Мы ценим обратную связь,мнение каждого клиента для нас важно! </h3>
+    <form method="post" enctype="multipart/form-data" >
+    {% csrf_token %}
+    {% bootstrap_form form layout='Horizontal' %}
+        {% buttons submit='Добавить отзыв' %} {% endbuttons %}
+    </form>
+
+        {% for content in review %}
+        <div class="card text-center">
+            <div class="card-header">
+
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{content.name}}</h5>
+                <p class="card-text">{{content.review}}</p>
+
+            </div>
+            <div class="card-footer text-muted">
+                {{ content.create_at }}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
