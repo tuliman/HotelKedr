@@ -12,7 +12,7 @@
         <div class="card-body ">
             <h5 class="card-title ">{{ item.name }}</h5>
             <p class="card-text  ">{{ item.description }}</p>
-            <p class="card-text "><small class="font-weight-bold" style="font-size: 14pt">{{ item.price }} Рублей </small></p>
+            <p class="card-text "><small class="font-weight-bold" style="font-size: 14pt"> Суточная аренда : {{ item.price }} Рублей </small></p>
         </div>
         <a href="{% url 'apartment_detail_url' slug=item.slug %}" class="btn btn-primary" target="_blank">Подробней</a>
     </div>

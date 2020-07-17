@@ -12,6 +12,7 @@
 
         <div class="carousel-inner ">
             {% for photo in images %}
+                
                 {% if forloop.first%}
             <div class="carousel-item {% if forloop.first %} active" {% endif %} >
                 <img src="{{ photo.img.url }}" class="img-set d-block w-100 rounded " alt="...">
