@@ -5,7 +5,7 @@ from datetime import datetime
 from django.contrib import messages
 
 EMAIL_ADDRESS = 'teastysmtp@mail.ru'
-EMAIL_PASSWORD = '250768ak'
+EMAIL_PASSWORD = ''
 
 
 def send_manager(body):
