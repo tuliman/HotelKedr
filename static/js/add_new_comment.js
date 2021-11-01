@@ -27,6 +27,7 @@ $(document).ready(function (){
                 encode:true,
             }).done(function (data){
                 console.log(data)
+                form.reset()
                 $(".AprtmentRewiewBlock").append(`<div class="card text-center"><div class="card-header"></div><div class="card-body"> <h5 class="card-title">${data.name}</h5><p class="card-text">${data.review}</p></div><div class="card-footer text-muted">${now.format('LLL')}</div></div>`)
         })
     })
