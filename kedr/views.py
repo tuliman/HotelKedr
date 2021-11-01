@@ -2,13 +2,19 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
-
+from django.http import Http404
+from rest_framework import routers, serializers
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
 from .forms import *
 from .models import *
 from .send_menejer import send_manager
 
 
 # Create your views here.
+from .serializers import ReviewSerializer
+
 
 def index(request):
     apartment_info = Apartment.objects.all()
@@ -108,20 +114,26 @@ def add_contact(request):
     return render(request, 'kedr/contacts.html')
 
 
-class ApartmentsReview(View):
-    def post(self, request):
-        form = ApartmentReviewForm(request.POST)
-        if form.is_valid():
-            print(form)
-            form.save()
-            return redirect(index)
-        else:
-            review = ApartmentReview.objects.all()
-            context = {'form': form, 'review': review}
-            return render(request, 'kedr/review.html', context)
+class ReviewView(APIView):
 
     def get(self, request):
-        form = ApartmentReviewForm(request.POST)
+        queryset = ApartmentReview.objects.all()
+        serialized_data = ReviewSerializer()
+        return Response(serialized_data.data)
+
+    def post(self, request):
+        data = request.data
+
+        serialized_data = ReviewSerializer(data=data)
+        if serialized_data.is_valid():
+            serialized_data.save()
+            ApartmentReview.objects.last()
+            return Response(serialized_data.data,status=status.HTTP_201_CREATED)
+
+
+class ApartmentsReview(View):
+    def get(self, request):
+        form = ApartmentReviewForm()
         review = ApartmentReview.objects.all()
         context = {
             'form': form,

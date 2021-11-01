@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="Django default" uuid="77a42c9d-68db-44a6-a0d3-44e793541caa">
+    <data-source source="LOCAL" name="db" uuid="2cf5e82c-e547-4a0b-b8dd-2e68c61019af">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
-      <imported>true</imported>
-      <remarks>$PROJECT_DIR$/HotelKedr/settings.py</remarks>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:D:\HotelKedr\db.sqlite3</jdbc-url>
+      <jdbc-url>jdbc:sqlite:C:\Users\arturkorshuk\PycharmProjects\HotelKedr\db.sqlite3</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
 </project>
