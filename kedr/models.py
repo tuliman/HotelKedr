@@ -12,13 +12,14 @@ def gen_slug(s):
 
 
 class Apartment(models.Model):
-    name = models.CharField(max_length=100,verbose_name='Название')
-    slug = models.CharField(max_length=100, unique=True, db_index=True,verbose_name='Уникальный индефикатор',help_text='Английскими буквами русские слова')
-    room_value = models.CharField(max_length=100,verbose_name="Количество комнат")
-    description_title = models.TextField(blank=True,verbose_name="Краткое описание")
-    price = models.CharField(max_length=50,verbose_name="Стоимость Аренды")
-    description = models.TextField(blank=True,verbose_name="Полное описание")
-    images = models.ImageField(upload_to='',verbose_name="Изображение")
+    name = models.CharField(max_length=100, verbose_name='Название')
+    slug = models.CharField(max_length=100, unique=True, db_index=True, verbose_name='Уникальный индикатор',
+                            help_text='Английскими буквами русские слова')
+    room_value = models.CharField(max_length=100, verbose_name="Количество комнат")
+    description_title = models.TextField(blank=True, verbose_name="Краткое описание")
+    price = models.CharField(max_length=50, verbose_name="Стоимость Аренды")
+    description = models.TextField(blank=True, verbose_name="Полное описание")
+    images = models.ImageField(upload_to='', verbose_name="Изображение")
 
     def save(self, *args, **kwargs):
         if not self.id:
@@ -36,9 +37,9 @@ class Photo(models.Model):
 
 class ToBook(models.Model):
     name = models.CharField(max_length=100, verbose_name='Имя')
-    email = models.EmailField(max_length=100,verbose_name='Емеил')
-    phone_number = models.CharField(max_length=20,verbose_name="Телефонный номер")
-    description = models.TextField(db_index=True,verbose_name='Пожелания по подборуу')
+    email = models.EmailField(max_length=100, verbose_name='Email')
+    phone_number = models.CharField(max_length=20, verbose_name="Телефонный номер")
+    description = models.TextField(db_index=True, verbose_name='Пожелания по подбору')
     reservation_date = models.DateTimeField(auto_now_add=True)
 
     def get_absolute_url(self):
@@ -48,4 +49,4 @@ class ToBook(models.Model):
 class ApartmentReview(models.Model):
     name = models.CharField(max_length=100, verbose_name='Имя Фамилия Отчество')
     review = models.TextField(verbose_name='Отзыв')
-    create_at = models.DateTimeField(auto_now_add=True,verbose_name='Коментарий добавлен')
+    create_at = models.DateTimeField(auto_now_add=True, verbose_name='Комментарий добавлен')

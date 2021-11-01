@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django_cleanup',
     'django.contrib.sites',
     'django.contrib.sitemaps',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
