@@ -8,8 +8,8 @@
 
 {% block content %}
     <div class="container AprtmentRewiewBlock ">
-        <h1 style="font-family: 'Harlow Solid Italic'"> Можете оставить ваше озыв в форме которая находится ниже : </h1>
-        <h3 style="font-family: 'Harlow Solid Italic'"> Мы ценим обратную связь,мнение каждого клиента для нас важно! </h3>
+        <h1 class="TextField" > Можете оставить ваше озыв в форме которая находится ниже : </h1>
+        <h3 class="TextField" > Мы ценим обратную связь,мнение каждого клиента для нас важно! </h3>
         <form method="post" id="commentForm" enctype="multipart/form-data" >
         {% csrf_token %}
         {% bootstrap_form form layout='Horizontal' %}
