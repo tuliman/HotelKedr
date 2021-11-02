@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
 {% load static %}
+
 {% block title %}
     Озывы
 {% endblock %}
@@ -15,21 +16,20 @@
             <button class="btn btn-primary AddComment" >Добавить отзыв</button>
         </form>
 
-            {% for content in review %}
-            <div class="card text-center">
-                <div class="card-header">
+        {% for content in review %}
+        <div class="card text-center">
+            <div class="card-header">
 
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">{{content.name}}</h5>
-                    <p class="card-text">{{content.review}}</p>
-
-                </div>
-                <div class="card-footer text-muted">
-                    {{ content.create_at }}
-                </div>
             </div>
-            {% endfor %}
+            <div class="card-body">
+                <h5 class="card-title">{{content.name}}</h5>
+                <p class="card-text">{{content.review}}</p>
+            </div>
+            <div class="card-footer text-muted">
+                {{ content.create_at }}
+            </div>
+        </div>
+        {% endfor %}
     </div>
 
 {% endblock %}

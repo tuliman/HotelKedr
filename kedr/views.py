@@ -123,11 +123,9 @@ class ReviewView(APIView):
 
     def post(self, request):
         data = request.data
-
         serialized_data = ReviewSerializer(data=data)
         if serialized_data.is_valid():
             serialized_data.save()
-            ApartmentReview.objects.last()
             return Response(serialized_data.data,status=status.HTTP_201_CREATED)
 
 
@@ -140,3 +138,6 @@ class ApartmentsReview(View):
             'review': review
         }
         return render(request, 'kedr/review.html', context)
+
+def other(request):
+    return render(request,'kedr/other.html')

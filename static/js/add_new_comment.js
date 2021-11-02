@@ -1,9 +1,8 @@
 
 $(document).ready(function (){
-    $.get('/review/api',function (data){
+    $.get('/api',function (data){
         console.log(data)
     })
-
     var now = moment()
     now.locale('ru')
     $('.AddComment').on('click',function (e){

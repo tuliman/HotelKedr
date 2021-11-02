@@ -8,18 +8,18 @@
 
 {% block content %}
 <div class="container ">
-    <div id="carouselExampleControls" class="carousel slide col-sm-10" data-ride="carousel" >
+    <div id="carouselExampleControls" class="carousel slide col-sm-12" data-ride="carousel" style="border:0; background-image: url({% static 'img/background1.png'  %})" >
 
         <div class="carousel-inner ">
             {% for photo in images %}
                 
                 {% if forloop.first%}
             <div class="carousel-item {% if forloop.first %} active" {% endif %} >
-                <img src="{{ photo.img.url }}" class="img-set d-block w-100 rounded " alt="...">
+                <img src="{{ photo.img.url }}" class="img-set d-block w-100 rounded img-fluid " alt="...">
             </div>
                 {% else  %}
                 <div class="carousel-item">
-                    <img src="{{ photo.img.url }}" class=" img-set d-block w-100 rounded " alt="...">
+                    <img src="{{ photo.img.url }}" class=" img-set d-block w-100 rounded img-fluid " alt="...">
                 </div>
                 {% endif %}
             {%endfor%}
@@ -34,20 +34,20 @@
         </a>
     </div>
 
-    <div class="card text-center col-sm-10">
-        <div class="card-header">
+    <div class="card text-center col-sm-12" style="border: 0; background-image: url({% static 'img/background1.png'  %})">
+        <div class="card-header text">
             Количество комнат {{ apartment_detail.room_value }}
         </div>
-        <div class="card-body">
-            <h5 class="card-title">{{apartment_detail.name}}</h5>
+        <div class="card-body ">
+            <h5 class="card-title text">{{apartment_detail.name}}</h5>
             <p class="card-text">{{ apartment_detail.description }}</p>
 
         </div>
-        <div class="card-footer text" style="">
+        <div class="card-footer text" style=>
             <b>Суточная аренда : {{ apartment_detail.price }}</b>
 
     </div>
-        <a href="{% url 'to_book_url' %}" class="btn btn-primary" target="_blank">Забронировать</a>
+        <a href="{% url 'to_book_url' %}" class="btn btn-primary text" target="_blank">Забронировать</a>
             {% if request.user.is_authenticated  %}
             <a href="{%url 'update_apartment' slug=apartment_detail.slug %}" class="btn btn-dark" target="_blank"> Правки </a>
         {% endif %}
