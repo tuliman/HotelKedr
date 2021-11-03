@@ -36,9 +36,9 @@ class Photo(models.Model):
 
 
 class ToBook(models.Model):
-    name = models.CharField(max_length=100, verbose_name='Имя')
+    name = models.CharField(max_length=100, verbose_name='Имя', blank=True)
     email = models.EmailField(max_length=100, verbose_name='Email')
-    phone_number = models.CharField(max_length=20, verbose_name="Телефонный номер")
+    phone_number = models.CharField(max_length=20, verbose_name="Телефонный номер", blank=True)
     description = models.TextField(db_index=True, verbose_name='Пожелания по подбору')
     reservation_date = models.DateTimeField(auto_now_add=True)
 
@@ -47,6 +47,6 @@ class ToBook(models.Model):
 
 
 class ApartmentReview(models.Model):
-    name = models.CharField(max_length=100, verbose_name='Имя Фамилия Отчество',blank=True)
+    name = models.CharField(max_length=100, verbose_name='Имя Фамилия Отчество', blank=True)
     review = models.TextField(verbose_name='Отзыв')
     create_at = models.DateTimeField(auto_now_add=True, verbose_name='Комментарий добавлен')

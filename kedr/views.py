@@ -11,9 +11,8 @@ from .forms import *
 from .models import *
 from .send_menejer import send_manager
 
-
 # Create your views here.
-from .serializers import ReviewSerializer
+from .serializers import ReviewSerializer, ReserveSerializer
 
 
 def index(request):
@@ -33,20 +32,25 @@ def detail(request, slug):
     return render(request, 'kedr/detail.html', context)
 
 
+class BookingApiView(APIView):
+    def get(self, request):
+        return Response({'message': 'success'}, status=status.HTTP_200_OK)
+
+    def post(self, request):
+        data = request.data
+        serialized_data = ReserveSerializer(data=data)
+        if serialized_data.is_valid():
+            serialized_data.save()
+            send_manager(serialized_data.data)
+            return Response(status=status.HTTP_201_CREATED)
+        else:
+            return Response(serialized_data.data, status=status.HTTP_400_BAD_REQUEST)
+
+
 class Booking(View):
     def get(self, request):
         form = ReservationDate()
-
         return render(request, 'kedr/reserve.html', context={'form': form})
-
-    def post(self, request):
-        bound_form = ReservationDate(request.POST)
-        if bound_form.is_valid():
-            new_reservation = bound_form.save()
-            send_manager(bound_form.cleaned_data)
-            messages.add_message(request, messages.SUCCESS, 'Ваша заявка на бронирование успешно добавлена')
-            return redirect('apartment_list_url')
-        return render(request, 'kedr/reserve.html', context={'forms': bound_form})
 
 
 class CreateApart(LoginRequiredMixin, View):
@@ -126,7 +130,7 @@ class ReviewView(APIView):
         serialized_data = ReviewSerializer(data=data)
         if serialized_data.is_valid():
             serialized_data.save()
-            return Response(serialized_data.data,status=status.HTTP_201_CREATED)
+            return Response(serialized_data.data, status=status.HTTP_201_CREATED)
 
 
 class ApartmentsReview(View):
@@ -139,5 +143,6 @@ class ApartmentsReview(View):
         }
         return render(request, 'kedr/review.html', context)
 
+
 def other(request):
-    return render(request,'kedr/other.html')
+    return render(request, 'kedr/other.html')

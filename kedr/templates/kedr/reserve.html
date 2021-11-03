@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}
     Бронирование
 {% endblock %}
@@ -17,7 +18,7 @@
     </p>
     </div>
 
-<form action="{% url 'to_book_url' %}" method="post">
+<form id = 'ReserveBocking' action="{% url 'to_book_url' %}" method="post">
     {% csrf_token %}
     <div class="container">
     {% for field in form %}
@@ -28,9 +29,14 @@
 
   </div>
         {% endfor %}
-    <button type="submit" class="btn btn-primary"> Отправить </button>
+    <button  class="btn btn-primary SenderBocking"> Отправить </button>
 
     </div>
 </form>
-
+    <div class="flash-message js-flash-message" role="status" id="flashMessage1" data-duration="5000">
+  <p>This is a flash message</p>
+</div>
+{% endblock %}
+{% block script %}
+    <script type="module" src="{% static 'js/add_new_boocking.js'  %}"></script>
 {% endblock %}
