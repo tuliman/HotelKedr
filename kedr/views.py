@@ -1,14 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import View
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib import messages
-from django.http import Http404
-from rest_framework import routers, serializers
 from rest_framework.views import APIView
+from django.contrib import messages
 from rest_framework.response import Response
 from rest_framework import status
-from .forms import *
-from .models import *
+from .forms import ReservationDate, ApartmentForm, ApartmentFormSet, ApartmentReviewForm
+from .models import Apartment, ApartmentReview
 from .send_menejer import send_manager
 
 # Create your views here.
@@ -62,6 +60,7 @@ class CreateApart(LoginRequiredMixin, View):
 
     def post(self, request):
         form = ApartmentForm(request.POST, request.FILES)
+
         if form.is_valid():
             bb = form.save()
             formset = ApartmentFormSet(request.POST, request.FILES, instance=bb)
@@ -75,11 +74,31 @@ class CreateApart(LoginRequiredMixin, View):
                 return render(request, 'kedr/create_apartment.html', context)
 
 
+class DeleteApartment(LoginRequiredMixin, View):
+    def get(self, request, slug):
+        data = get_object_or_404(Apartment, slug=slug)
+        form = ApartmentForm(instance=data)
+        formset = ApartmentFormSet(instance=data)
+        context = {'form': form, 'formset': formset}
+        return render(request, 'kedr/delete_apartment.html', context)
+
+    def post(self, request, slug):
+        data = get_object_or_404(Apartment, slug=slug)
+        if data:
+            data.delete()
+            message = messages.success(request, 'Успешно удален')
+            data.save()
+            return redirect(index)
+        else:
+            message = messages.error(request,'При удалении произошла ошибка')
+            return message
+
+
 class UpdateApartment(LoginRequiredMixin, View):
     def get(self, request, slug):
         data = get_object_or_404(Apartment, slug=slug)
         form = ApartmentForm(instance=data)
-        formset = ApartmentFormSet()
+        formset = ApartmentFormSet(instance=data)
         context = {'form': form, 'formset': formset}
         return render(request, 'kedr/updete_apartment.html', context)
 
@@ -142,7 +161,3 @@ class ApartmentsReview(View):
             'review': review
         }
         return render(request, 'kedr/review.html', context)
-
-
-def other(request):
-    return render(request, 'kedr/other.html')

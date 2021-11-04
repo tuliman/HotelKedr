@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block title %}
+    Удаление ненужных файлов
+{% endblock %}
+{% block content %}
+    {% if messages %}
+        {% for message in messages %}
+        <li{% if message.tags == 'errors' %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+    {% endif %}
+    <div class="container">
+        <h2>Удалить объект</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% bootstrap_form form layout='Horizontal' %}
+            {% bootstrap_formset formset layout='Horizontal' %}
+            {% buttons submit='Удалить' %} {% endbuttons %}
+        </form>
+    </div>
+{% endblock %}

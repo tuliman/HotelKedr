@@ -1,8 +1,10 @@
+import os
+
 from django.db import models
 from django.utils.text import slugify
 from django.shortcuts import reverse
 from time import time
-
+from PIL import Image
 
 # Create your models here.
 
@@ -12,6 +14,7 @@ def gen_slug(s):
 
 
 class Apartment(models.Model):
+
     name = models.CharField(max_length=100, verbose_name='Название')
     slug = models.CharField(max_length=100, unique=True, db_index=True, verbose_name='Уникальный индикатор',
                             help_text='Английскими буквами русские слова')
@@ -19,7 +22,7 @@ class Apartment(models.Model):
     description_title = models.TextField(blank=True, verbose_name="Краткое описание")
     price = models.CharField(max_length=50, verbose_name="Стоимость Аренды")
     description = models.TextField(blank=True, verbose_name="Полное описание")
-    images = models.ImageField(upload_to='', verbose_name="Изображение")
+    images = models.ImageField(upload_to='apartment/', verbose_name="Изображение")
 
     def save(self, *args, **kwargs):
         if not self.id:
@@ -32,7 +35,7 @@ class Apartment(models.Model):
 
 class Photo(models.Model):
     apartment = models.ForeignKey(Apartment, on_delete=models.CASCADE)
-    img = models.ImageField(upload_to='media/apartment')
+    img = models.ImageField(upload_to='apartment/')
 
 
 class ToBook(models.Model):

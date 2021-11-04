@@ -7,6 +7,13 @@
 {% block content %}
 <div class="row">
 <div class="container" >
+{% if messages %}
+    <ul class="messages">
+    {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+    </ul>
+{% endif %}
 {% for item in info %}
     <div class="card mb-1 col-sm-auto fluid text-center " style="margin-top: 10px ;background-image: url({% static 'img/background1.png'%});border: 0">
         <img class="card-img-top title-img" style="height: auto;width: auto" src="{{ item.images.url }}" alt="Card image cap">

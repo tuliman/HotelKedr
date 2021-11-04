@@ -8,11 +8,11 @@
 
 {% block content %}
 <div class="container ">
-    <div id="carouselExampleControls" class="carousel slide col-sm-12" data-ride="carousel" style="border:0; background-image: url({% static 'img/background1.png'  %})" >
+    <div id="carouselExampleControls" class="carousel slide col-sm-10" data-ride="carousel" style="border:0; background-image: url({% static 'img/background1.png'  %})" >
 
         <div class="carousel-inner ">
             {% for photo in images %}
-                
+
                 {% if forloop.first%}
             <div class="carousel-item {% if forloop.first %} active" {% endif %} >
                 <img src="{{ photo.img.url }}" class="img-set d-block w-100 rounded img-fluid " alt="...">
@@ -34,7 +34,7 @@
         </a>
     </div>
 
-    <div class="card text-center col-sm-12" style="border: 0; background-image: url({% static 'img/background1.png'  %})">
+    <div class="card text-center col-sm-10" style="border: 0; background-image: url({% static 'img/background1.png'  %})">
         <div class="card-header text">
             Количество комнат {{ apartment_detail.room_value }}
         </div>
@@ -48,14 +48,11 @@
 
     </div>
         <a href="{% url 'to_book_url' %}" class="btn btn-primary text" target="_blank">Забронировать</a>
-            {% if request.user.is_authenticated  %}
-            <a href="{%url 'update_apartment' slug=apartment_detail.slug %}" class="btn btn-dark" target="_blank"> Правки </a>
+        {% if request.user.is_authenticated  %}
+            <a href="{%url 'update_apartment' slug=apartment_detail.slug %}" class="btn btn-dark" > Правки </a>
+            <a href="{%url 'delete_apartment' slug=apartment_detail.slug %}" class="btn btn-dark" > Удалить </a>
         {% endif %}
     </div>
     </div>
 
 {% endblock %}
-
-{% for photo in images %}
-    <img src="{{ photo.img.url }}" class="img-set " >
-{% endfor %}
