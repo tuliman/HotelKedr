@@ -89,4 +89,6 @@ db.sqlite3
 /Configs/
 /media/
 /kedr/migrations/
-.idea
+/.idea/
+/venv/
+
