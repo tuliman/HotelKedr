@@ -13,7 +13,8 @@
         <form method="post" id="commentForm" enctype="multipart/form-data" >
         {% csrf_token %}
         {% bootstrap_form form layout='Horizontal' %}
-            <button class="btn btn-primary AddComment" >Добавить отзыв</button>
+            <button class="btn btn-primary AddComment" >
+                Добавить отзыв</button>
         </form>
 
         {% for content in review %}
