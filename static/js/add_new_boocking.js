@@ -38,9 +38,9 @@ $(document).ready(function (){
             }
             else if(key==='email' && value){
                 e.preventDefault()
-                if(ValidateEmail(value,key)){}
+                if(ValidateEmail(value,key)){
                 return false
-            }
+            }}
             data[key]=value
         })
         $.ajax(
