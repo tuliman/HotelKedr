@@ -24,6 +24,7 @@ $(document).ready(function (){
     $('.SenderBocking').on('click',function (e){
         e.preventDefault()
         $('.error').remove()
+        var _this = $('.SenderBocking')
         var form = document.getElementById('ReserveBocking')
         var formData = new FormData(form)
         var csrf = $('input[name=csrfmiddlewaretoken]').val()
@@ -35,9 +36,9 @@ $(document).ready(function (){
                     return false
                 }
             }
-            if(key==='email' && value){
+            else if(key==='email' && value){
                 e.preventDefault()
-                ValidateEmail(value,key)
+                if(ValidateEmail(value,key)){}
                 return false
             }
             data[key]=value
@@ -48,15 +49,18 @@ $(document).ready(function (){
                 data:JSON.stringify(data),
                 url:'/booking/api',
                 headers: {"X-CSRFToken":csrf},
+                beforeSend: function () {
+                        _this
+                        .prop('disabled', true)
+                        .find('.spinner-grow').removeClass('d-none');
+                        },
                 contentType: "application/json",
                 encode:true,
             }).done(function (data){
+                _this.prop('disabled', false).find('.spinner-grow').addClass('d-none');
                 form.reset()
-
-                console.log(data)
-
         }).fail(function (data){
-            console.log(data)
+            _this.prop('disabled', false).find('.spinner-grow').addClass('d-none');
         })
     })
 })

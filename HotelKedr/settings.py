@@ -81,11 +81,11 @@ WSGI_APPLICATION = 'HotelKedr.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': configs.get('postgres','db_name'),
-        'USER':configs.get('postgres','username'),
-        'PASSWORD':configs.get('postgres','password'),
-        'HOST':configs.get('postgres','host'),
-        'PORT':configs.get('postgres','port')
+        'NAME': configs.get('postgres', 'db_name'),
+        'USER': configs.get('postgres', 'username'),
+        'PASSWORD': configs.get('postgres', 'password'),
+        'HOST': configs.get('postgres', 'host'),
+        'PORT': configs.get('postgres', 'port')
     }
 }
 
@@ -125,7 +125,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
+    os.path.join(BASE_DIR, 'static'),
 ]
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

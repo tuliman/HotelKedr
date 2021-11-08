@@ -21,15 +21,16 @@
 <form id = 'ReserveBocking' action="{% url 'to_book_url' %}" method="post">
     {% csrf_token %}
     <div class="container">
-    {% for field in form %}
-     <div class="form-group col-md-6" >
-
-     {{ field.label }}
-     {{ field }}
-
-  </div>
+        {% for field in form %}
+             <div class="form-group col-md-6" >
+             {{ field.label }}
+             {{ field }}
+            </div>
         {% endfor %}
-    <button  class="btn btn-primary SenderBocking"> Отправить </button>
+    <button  class="btn btn-primary SenderBocking">
+        <span class="spinner-grow SpinReserve spinner-grow-sm d-none" role="status" aria-hidden="true"></span>
+        Отправить
+    </button>
 
     </div>
 </form>

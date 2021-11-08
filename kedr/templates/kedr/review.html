@@ -14,7 +14,9 @@
         {% csrf_token %}
         {% bootstrap_form form layout='Horizontal' %}
             <button class="btn btn-primary AddComment" >
-                Добавить отзыв</button>
+                <span class="spinner-grow SpinComment spinner-grow-sm d-none" role="status" aria-hidden="true"></span>
+                Добавить отзыв
+            </button>
         </form>
 
         {% for content in review %}
